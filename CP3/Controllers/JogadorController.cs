@@ -1,6 +1,7 @@
 ﻿using CP3.Data;
 using CP3.DTOs;
 using CP3.Entities;
+using CP3.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -28,13 +29,28 @@ public class JogadorController : ControllerBase
     {
         var jogadores = await _context.Jogadores
             .Include(j => j.Time)
-            .Include(j => j.PerfilCompetitivo)
             .ToListAsync();
 
         if (!jogadores.Any())
             return NoContent();
 
-        return Ok(jogadores);
+        var response = jogadores.Select(j => new JogadorResumoDto
+        {
+            Id = j.Id,
+            Nickname = j.Nickname,
+            Funcao = j.Funcao,
+            Idade = j.Idade,
+            Time = j.Time == null ? null : new TimeResumoDto
+            {
+                Id = j.Time.Id,
+                Nome = j.Time.Nome,
+                Jogo = j.Time.Jogo,
+                Pais = j.Time.Pais,
+                Ranking = j.Time.Ranking
+            }
+        });
+
+        return Ok(response);
     }
 
     /// <summary>
@@ -47,13 +63,28 @@ public class JogadorController : ControllerBase
     {
         var jogador = await _context.Jogadores
             .Include(j => j.Time)
-            .Include(j => j.PerfilCompetitivo)
             .FirstOrDefaultAsync(j => j.Id == id);
 
         if (jogador == null)
             return NotFound();
 
-        return Ok(jogador);
+        var response = new JogadorResumoDto
+        {
+            Id = jogador.Id,
+            Nickname = jogador.Nickname,
+            Funcao = jogador.Funcao,
+            Idade = jogador.Idade,
+            Time = jogador.Time == null ? null : new TimeResumoDto
+            {
+                Id = jogador.Time.Id,
+                Nome = jogador.Time.Nome,
+                Jogo = jogador.Time.Jogo,
+                Pais = jogador.Time.Pais,
+                Ranking = jogador.Time.Ranking
+            }
+        };
+
+        return Ok(response);
     }
 
     /// <summary>
@@ -66,14 +97,29 @@ public class JogadorController : ControllerBase
     {
         var jogadores = await _context.Jogadores
             .Include(j => j.Time)
-            .Include(j => j.PerfilCompetitivo)
             .Where(j => j.TimeId == timeId)
             .ToListAsync();
 
         if (!jogadores.Any())
             return NoContent();
 
-        return Ok(jogadores);
+        var response = jogadores.Select(j => new JogadorResumoDto
+        {
+            Id = j.Id,
+            Nickname = j.Nickname,
+            Funcao = j.Funcao,
+            Idade = j.Idade,
+            Time = j.Time == null ? null : new TimeResumoDto
+            {
+                Id = j.Time.Id,
+                Nome = j.Time.Nome,
+                Jogo = j.Time.Jogo,
+                Pais = j.Time.Pais,
+                Ranking = j.Time.Ranking
+            }
+        });
+
+        return Ok(response);
     }
 
     /// <summary>
@@ -86,14 +132,29 @@ public class JogadorController : ControllerBase
     {
         var jogadores = await _context.Jogadores
             .Include(j => j.Time)
-            .Include(j => j.PerfilCompetitivo)
             .Where(j => j.Funcao.ToLower() == funcao.ToLower())
             .ToListAsync();
 
         if (!jogadores.Any())
             return NoContent();
 
-        return Ok(jogadores);
+        var response = jogadores.Select(j => new JogadorResumoDto
+        {
+            Id = j.Id,
+            Nickname = j.Nickname,
+            Funcao = j.Funcao,
+            Idade = j.Idade,
+            Time = j.Time == null ? null : new TimeResumoDto
+            {
+                Id = j.Time.Id,
+                Nome = j.Time.Nome,
+                Jogo = j.Time.Jogo,
+                Pais = j.Time.Pais,
+                Ranking = j.Time.Ranking
+            }
+        });
+
+        return Ok(response);
     }
 
     /// <summary>

@@ -1,6 +1,7 @@
 ﻿using CP3.Data;
 using CP3.DTOs;
 using CP3.Entities;
+using CP3.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -26,14 +27,21 @@ public class TimeController : ControllerBase
     [SwaggerResponse(204, "Nenhum time encontrado")]
     public async Task<IActionResult> GetAll()
     {
-        var times = await _context.Times
-            .Include(t => t.Jogadores)
-            .ToListAsync();
+        var times = await _context.Times.ToListAsync();
 
         if (!times.Any())
             return NoContent();
 
-        return Ok(times);
+        var response = times.Select(t => new TimeResumoDto
+        {
+            Id = t.Id,
+            Nome = t.Nome,
+            Jogo = t.Jogo,
+            Pais = t.Pais,
+            Ranking = t.Ranking
+        });
+
+        return Ok(response);
     }
 
     /// <summary>
@@ -45,13 +53,21 @@ public class TimeController : ControllerBase
     public async Task<IActionResult> GetById(int id)
     {
         var time = await _context.Times
-            .Include(t => t.Jogadores)
             .FirstOrDefaultAsync(t => t.Id == id);
 
         if (time == null)
             return NotFound();
 
-        return Ok(time);
+        var response = new TimeResumoDto
+        {
+            Id = time.Id,
+            Nome = time.Nome,
+            Jogo = time.Jogo,
+            Pais = time.Pais,
+            Ranking = time.Ranking
+        };
+
+        return Ok(response);
     }
 
     /// <summary>
@@ -63,14 +79,22 @@ public class TimeController : ControllerBase
     public async Task<IActionResult> GetByJogo(string jogo)
     {
         var times = await _context.Times
-            .Include(t => t.Jogadores)
             .Where(t => t.Jogo.ToLower() == jogo.ToLower())
             .ToListAsync();
 
         if (!times.Any())
             return NoContent();
 
-        return Ok(times);
+        var response = times.Select(t => new TimeResumoDto
+        {
+            Id = t.Id,
+            Nome = t.Nome,
+            Jogo = t.Jogo,
+            Pais = t.Pais,
+            Ranking = t.Ranking
+        });
+
+        return Ok(response);
     }
 
     /// <summary>

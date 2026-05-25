@@ -1,6 +1,7 @@
 ﻿using CP3.Data;
 using CP3.DTOs;
 using CP3.Entities;
+using CP3.DTOs.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -28,12 +29,37 @@ public class PerfilCompetitivoController : ControllerBase
     {
         var perfis = await _context.PerfisCompetitivos
             .Include(p => p.Jogador)
+            .ThenInclude(j => j!.Time)
             .ToListAsync();
 
         if (!perfis.Any())
             return NoContent();
 
-        return Ok(perfis);
+        var response = perfis.Select(p => new PerfilCompetitivoResponseDto
+        {
+            Id = p.Id,
+            KDA = p.KDA,
+            WinRate = p.WinRate,
+            HorasJogadas = p.HorasJogadas,
+            JogadorId = p.JogadorId,
+            Jogador = p.Jogador == null ? null : new JogadorResumoDto
+            {
+                Id = p.Jogador.Id,
+                Nickname = p.Jogador.Nickname,
+                Funcao = p.Jogador.Funcao,
+                Idade = p.Jogador.Idade,
+                Time = p.Jogador.Time == null ? null : new TimeResumoDto
+                {
+                    Id = p.Jogador.Time.Id,
+                    Nome = p.Jogador.Time.Nome,
+                    Jogo = p.Jogador.Time.Jogo,
+                    Pais = p.Jogador.Time.Pais,
+                    Ranking = p.Jogador.Time.Ranking
+                }
+            }
+        });
+
+        return Ok(response);
     }
 
     /// <summary>
@@ -46,12 +72,37 @@ public class PerfilCompetitivoController : ControllerBase
     {
         var perfil = await _context.PerfisCompetitivos
             .Include(p => p.Jogador)
+            .ThenInclude(j => j!.Time)
             .FirstOrDefaultAsync(p => p.Id == id);
 
         if (perfil == null)
             return NotFound();
 
-        return Ok(perfil);
+        var response = new PerfilCompetitivoResponseDto
+        {
+            Id = perfil.Id,
+            KDA = perfil.KDA,
+            WinRate = perfil.WinRate,
+            HorasJogadas = perfil.HorasJogadas,
+            JogadorId = perfil.JogadorId,
+            Jogador = perfil.Jogador == null ? null : new JogadorResumoDto
+            {
+                Id = perfil.Jogador.Id,
+                Nickname = perfil.Jogador.Nickname,
+                Funcao = perfil.Jogador.Funcao,
+                Idade = perfil.Jogador.Idade,
+                Time = perfil.Jogador.Time == null ? null : new TimeResumoDto
+                {
+                    Id = perfil.Jogador.Time.Id,
+                    Nome = perfil.Jogador.Time.Nome,
+                    Jogo = perfil.Jogador.Time.Jogo,
+                    Pais = perfil.Jogador.Time.Pais,
+                    Ranking = perfil.Jogador.Time.Ranking
+                }
+            }
+        };
+
+        return Ok(response);
     }
 
     /// <summary>
@@ -64,12 +115,37 @@ public class PerfilCompetitivoController : ControllerBase
     {
         var perfil = await _context.PerfisCompetitivos
             .Include(p => p.Jogador)
+            .ThenInclude(j => j!.Time)
             .FirstOrDefaultAsync(p => p.JogadorId == jogadorId);
 
         if (perfil == null)
             return NotFound();
 
-        return Ok(perfil);
+        var response = new PerfilCompetitivoResponseDto
+        {
+            Id = perfil.Id,
+            KDA = perfil.KDA,
+            WinRate = perfil.WinRate,
+            HorasJogadas = perfil.HorasJogadas,
+            JogadorId = perfil.JogadorId,
+            Jogador = perfil.Jogador == null ? null : new JogadorResumoDto
+            {
+                Id = perfil.Jogador.Id,
+                Nickname = perfil.Jogador.Nickname,
+                Funcao = perfil.Jogador.Funcao,
+                Idade = perfil.Jogador.Idade,
+                Time = perfil.Jogador.Time == null ? null : new TimeResumoDto
+                {
+                    Id = perfil.Jogador.Time.Id,
+                    Nome = perfil.Jogador.Time.Nome,
+                    Jogo = perfil.Jogador.Time.Jogo,
+                    Pais = perfil.Jogador.Time.Pais,
+                    Ranking = perfil.Jogador.Time.Ranking
+                }
+            }
+        };
+
+        return Ok(response);
     }
 
     /// <summary>
