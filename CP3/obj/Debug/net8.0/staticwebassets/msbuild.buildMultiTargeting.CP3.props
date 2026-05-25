@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\CP3.props" />
-</Project>
