@@ -12,7 +12,7 @@ public class ApplicationContext : DbContext
     
     public DbSet<Time>  Times { get; set; }
     public DbSet<Jogador> Jogadores { get; set; }
-    public DbSet<PerfilCompetitivo> PerfisCompetitivo { get; set; }
+    public DbSet<PerfilCompetitivo> PerfisCompetitivos { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -6,6 +6,9 @@ namespace CP3.Entities;
 public class Jogador
 {
     [Key]
+    public int Id { get; set; }
+    
+    [Required]
     [MaxLength(80)]
     public string Nickname { get; set; } = string.Empty;
     

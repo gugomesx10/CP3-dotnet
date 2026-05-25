@@ -5,6 +5,7 @@ C:\Rider\CP3\CP3\bin\Debug\net8.0\CP3.deps.json
 C:\Rider\CP3\CP3\bin\Debug\net8.0\CP3.runtimeconfig.json
 C:\Rider\CP3\CP3\bin\Debug\net8.0\CP3.dll
 C:\Rider\CP3\CP3\bin\Debug\net8.0\CP3.pdb
+C:\Rider\CP3\CP3\bin\Debug\net8.0\CP3.xml
 C:\Rider\CP3\CP3\bin\Debug\net8.0\Humanizer.dll
 C:\Rider\CP3\CP3\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Rider\CP3\CP3\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -21,6 +22,7 @@ C:\Rider\CP3\CP3\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\Rider\CP3\CP3\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Rider\CP3\CP3\bin\Debug\net8.0\Oracle.EntityFrameworkCore.dll
 C:\Rider\CP3\CP3\bin\Debug\net8.0\Oracle.ManagedDataAccess.dll
+C:\Rider\CP3\CP3\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll
 C:\Rider\CP3\CP3\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Rider\CP3\CP3\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Rider\CP3\CP3\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -109,8 +111,7 @@ C:\Rider\CP3\CP3\obj\Debug\net8.0\scopedcss\bundle\CP3.styles.css
 C:\Rider\CP3\CP3\obj\Debug\net8.0\CP3.csproj.Up2Date
 C:\Rider\CP3\CP3\obj\Debug\net8.0\CP3.dll
 C:\Rider\CP3\CP3\obj\Debug\net8.0\refint\CP3.dll
+C:\Rider\CP3\CP3\obj\Debug\net8.0\CP3.xml
 C:\Rider\CP3\CP3\obj\Debug\net8.0\CP3.pdb
 C:\Rider\CP3\CP3\obj\Debug\net8.0\CP3.genruntimeconfig.cache
 C:\Rider\CP3\CP3\obj\Debug\net8.0\ref\CP3.dll
-C:\Rider\CP3\CP3\bin\Debug\net8.0\CP3.xml
-C:\Rider\CP3\CP3\obj\Debug\net8.0\CP3.xml
